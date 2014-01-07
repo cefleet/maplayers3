@@ -1,0 +1,3 @@
+[submodule "public/libs/MCOR3"]
+	path = public/libs/MCOR3
+	url = https://github.com/cefleet/MCOR3.git
