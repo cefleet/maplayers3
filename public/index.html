@@ -9,30 +9,20 @@
         <script src="libs/ol3JS/index.js"></script>
     
         <script src="libs/MCOR3/MCOR.js"></script>
-        <title>OpenLayers 3 example</title>
+        <script src="maplayers/main.js"></script>
+
+        <title>Maplayers3</title>
         <style>
-      .map {
-        height: 400px;
-        width: 100%;
-      }
-    </style>
+            .map {
+                height: 900px;
+                width: 100%;
+            }
+        </style>
   </head>
   <body>
-    <h2>My Map</h2>
     <div id="map" class="map"></div>
-    <script type="text/javascript">
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.MapQuestOpenAerial()
-          })
-        ],
-        view: new ol.View2D({
-          center: ol.proj.transform([37.41, 8.82], 'EPSG:4326', 'EPSG:3857'),
-          zoom: 4
-        })
-      });
+    <script>
+        M3.init();
     </script>
   </body>
 </html>
