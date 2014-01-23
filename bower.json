@@ -1,9 +1,0 @@
-{
-    "name":"Maplayes 3",
-    "version":"0.0.1",
-    "dependencies":{
-        "bootstrap":"latest",
-        "ol3JS":"http://ol3js.org/en/master/build/ol.js",
-        "ol3CSS":"http://ol3js.org/en/master/build/ol.css"
-    }
-}

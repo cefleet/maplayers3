@@ -13,6 +13,17 @@ L.GeoJSON.WFS = L.GeoJSON.extend({
     
     initialize: function(serviceUrl, featureType, options) {
         options = options || {};
+        
+        //TODO this should only be if the layer is clickable
+        /*
+        options.onEachFeature = function(feature,layer){
+            //layer.bindPopup(feature.properties.name);
+            layer.on('click', function(){
+                console.log(this);
+                
+            }, {layer:layer,feature:feature});
+        };
+        */
         L.GeoJSON.prototype.initialize.call(this, null, options);
         
         //default is going to be 2.0.0 from now on
@@ -33,6 +44,8 @@ L.GeoJSON.WFS = L.GeoJSON.extend({
         moveend event listener.
     */
     onAdd: function(map) {
+        console.log(this);
+        console.log(map);
         L.LayerGroup.prototype.onAdd.call(this, map);
         this.map = map;
         this.map.on('moveend', this._getData, this);

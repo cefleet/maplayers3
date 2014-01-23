@@ -169,5 +169,5 @@ L.Control.Layers.ML3 = L.Control.Layers.extend({
     }
 });
 L.control.ml3Layers = function (baseLayers, overlays, options) {
-        return new L.Control.Layers.ML3(baseLayers, overlays, options);
+    return new L.Control.Layers.ML3(baseLayers, overlays, options);
 };
