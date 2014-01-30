@@ -115,11 +115,11 @@ L.Control.Layers.ML3 = L.Control.Layers.extend({
                 layer.options.ML3_options.button.buttonText
             )
         );
-        
+        /*
         var action = layer.options.ML3_options.button.action || 
             function(){console.log('No function was given')};
         button.addEventListener('click', action.bind(layer));
-        
+        */
         return button;
     },
 

@@ -60,10 +60,9 @@ L.GeoJSON.WFS = L.GeoJSON.extend({
         Saves the supplied data to the server using WFS-T (or my attempt at making it)
     */
     saveFeature : function(data){
-        console.log(data);
-        console.log(this);
+        
     },
-    
+
     onRemove: function(map){
         this.map.off('moveend',this._getData, this);
         
@@ -86,10 +85,10 @@ L.GeoJSON.WFS = L.GeoJSON.extend({
     _getData : function(){
         var bounds = this.map.getBounds();
         var bbox = [
+             bounds._southWest.lng,
             bounds._southWest.lat,
-            bounds._southWest.lng,
-            bounds._northEast.lat,
-            bounds._northEast.lng
+           bounds._northEast.lng,
+            bounds._northEast.lat
         ];
         bbox = bbox.toString();
         $.getJSON(this.getFeatureUrl+'&bbox='+bbox, function(data) {

@@ -1,3 +1,4 @@
+var wfsPort = 'http://23.253.35.36:1010/';
 ML3.config = {
     scale: {
         show: true,
@@ -17,9 +18,14 @@ ML3.config = {
             order:'2',
             clickable:true,
             options: {
-                db_table: 'test',
-                url:'https://mcorwfs-c9-cefleet.c9.io/wfs?',
+                db_table: 'conductor',
+                url:wfsPort+'wfs?',
                 options:{
+                    style : {
+                        "color": "#ff7800",
+                        "weight": 5,
+                        "opacity": 0.65
+                    },
                     ML3_options: {
                         button:{
                             buttonText : 'Options',
@@ -39,16 +45,21 @@ ML3.config = {
             order:'3',
             clickable:false,
             options: {
-                db_table: 'test3',
-                url:'https://mcorwfs-c9-cefleet.c9.io/wfs?',
+                db_table: 'structure',
+                url:wfsPort+'wfs?',
                 options : {
-                    style : {
-                        "color": "#ff7800",
-                        "weight": 5,
-                        "opacity": 0.65
+                    pointToLayer: function (feature, latlng) {
+                        return L.circleMarker(latlng, {
+                            radius: 8,
+                            fillColor: "#ff7800",
+                            color: "#000",
+                            weight: 1,
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        });
                     },
                     ML3_options: {
-                        hideAtZoom : 10   
+                        hideAtZoom : 16   
                     }
                 }
             }
@@ -68,12 +79,40 @@ ML3.config = {
 };
 
 document.addEventListener('DOMContentLoaded', function(){
-    //set the size
+    //the ioconnect needs to be the port/
+    //TODO this 
+    console.log('get this party started');
+    var listen = 'http://23.253.35.36:1999/';
+    var socket = io.connect(listen);
+    
+    //mapId needs to be pulled from the
+    var mapId = 'df665e0f-3335-44d1-afbd-e72628bee0b7';
+    
+    socket.emit('getConfig',{mapId:mapId});
+    
+    socket.on('ready', function (data) {
+        if(data.status ==='ready'){
+            var script = document.createElement("script");
+            script.src = "configs/config.js";
+            script.type = "text/javascript";
+            document.getElementsByTagName("head")[0].appendChild(script);
+        }
+       // ML3.config = data;
+        
+        ML3.config.size = {
+            height:document.documentElement.clientHeight,
+            width:document.documentElement.clientWidth
+        };
+        
+       // loadMap();
+    });
+    
     //TODO do an observer for when the height or width changes
+    
     var map = $g('map');
     map.style.height = ML3.config.size.height+'px';
     map.style.width = ML3.config.size.width+'px';
-    loadMap();
+    //loadMap();
 });
 
 var loadMap = function(){
@@ -101,5 +140,5 @@ var loadMap = function(){
         L.control.ml3Attributes(ML3.layerGroups.overlay,ML3.map);
 
     //sets the map view 
-    ML3.map.setView([80.47407, 98.96484], 8);
+    ML3.map.setView([31.191804849767344,-84.26693916320802], 12);
 };
