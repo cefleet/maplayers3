@@ -114,7 +114,6 @@ function toObj(obj, str) {
     return str.split(".").reduce(function(o, x) { return o[x] }, obj);
 }
 
-
 //Extras
 function pad(n, width, z) {
   z = z || '0';
